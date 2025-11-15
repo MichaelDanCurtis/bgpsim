@@ -3,7 +3,7 @@ name: Tests
 on:
   pull_request:
   push:
-    branches: [ "**" ]
+    branches: [ "main", "**" ]
 
 jobs:
   test:
@@ -11,6 +11,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Placeholder tests
-        run: |
-          echo "Hook real test runner when available (e.g., cargo test, pytest, go test)"
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: llvm-tools-preview
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('Cargo.lock') }}
+      - name: Run tests
+        run: cargo test --all-features --manifest-path bgpsim/Cargo.toml --no-fail-fast
+      - name: Run doc tests
+        run: cargo test --doc --all-features --manifest-path bgpsim/Cargo.toml

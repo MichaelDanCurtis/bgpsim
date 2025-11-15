@@ -3,7 +3,7 @@ name: Benchmarks
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * 1'  # Weekly Monday 06:00 UTC
 
 jobs:
   bench:
@@ -11,6 +11,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Placeholder benchmark
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('Cargo.lock') }}
+      - name: Run benchmarks
         run: |
-          echo "Add reproducible benchmark suite; block release on regressions"
+          echo "Benchmark suite placeholder: add 'cargo bench' or criterion tests"
+          echo "Track baselines; block release on regressions per constitution"
