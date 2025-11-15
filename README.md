@@ -4,6 +4,9 @@
 [![docs.rs](https://img.shields.io/docsrs/bgpsim)](https://docs.rs/bgpsim/0.17.3/bgpsim/)
 [![Coveralls](https://img.shields.io/coverallsCoverage/github/nsg-ethz/bgpsim)](https://coveralls.io/github/nsg-ethz/bgpsim)
 
+> **Note**: This is a fork of [nsg-ethz/bgpsim](https://github.com/nsg-ethz/bgpsim) with extended scope for BGP emulation and testing.
+> See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines and [BGPemu2 Constitution](docs/CONSTITUTION.md) for project principles.
+
 # A Network Control-Plane Simulator
 
 This is a simulator for BGP and OSPF routing protocols.
